@@ -360,9 +360,9 @@ export class Root extends React.Component<Props, State> {
     window.open("https://www.kipr.org/doc/index.html");
   };
 
-  onLogoutClick = () => {
-    signOutOfApp();
-  };
+  // onLogoutClick = () => {
+  //   signOutOfApp();
+  // };
 
   onDashboardClick = () => {
     window.location.href = '/';
@@ -478,7 +478,7 @@ export class Root extends React.Component<Props, State> {
             onStopClick={this.onStopClick_}
             onDocumentationClick={this.onDocumentationClick}
             onDashboardClick={this.onDashboardClick}
-            onLogoutClick={this.onLogoutClick}
+            // onLogoutClick={this.onLogoutClick}
             onFeedbackClick={this.onModalClick_(Modal.FEEDBACK)}
             simulatorState={simulatorState}
           />
