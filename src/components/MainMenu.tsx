@@ -12,6 +12,7 @@ interface MenuState {}
   
 type Props = MenuProps;
 type State = MenuState;
+
   
 import KIPR_LOGO_BLACK from '../assets/KIPR-Logo-Black-Text-Clear-Large.png';
 import KIPR_LOGO_WHITE from '../assets/KIPR-Logo-White-Text-Clear-Large.png';
@@ -83,9 +84,9 @@ export class MainMenu extends React.Component<Props, State> {
     super(props);
   }
 
-  private onLogoutClick_ = (event: React.MouseEvent<HTMLDivElement>) => {
-    signOutOfApp();
-  };
+  // private onLogoutClick_ = (event: React.MouseEvent<HTMLDivElement>) => {
+  //   signOutOfApp();
+  // };
 
   private onDashboardClick_ = (event: React.MouseEvent<HTMLDivElement>) => {
     window.location.href = '/';
@@ -99,7 +100,7 @@ export class MainMenu extends React.Component<Props, State> {
         <Logo theme={theme} src={theme.foreground === 'white' ? KIPR_LOGO_BLACK as string : KIPR_LOGO_WHITE as string} onClick={this.onDashboardClick_}/>
         <Spacer style={{ borderRight: `1px solid ${theme.borderColor}` }} />
         {/* <Item theme={theme} onClick={this.onDashboardClick_}><ItemIcon icon='compass'/> Dashboard</Item> */}
-        <Item theme={theme} onClick={this.onLogoutClick_}><ItemIcon icon='sign-out-alt'/> Logout</Item>
+        {/* <Item theme={theme} onClick={this.onLogoutClick_}><ItemIcon icon='sign-out-alt'/> Logout</Item> */}
       </Container>
     );
   }

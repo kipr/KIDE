@@ -24,8 +24,6 @@ export interface MenuProps extends StyleProps, ThemeProps {
   onAboutClick: () => void;
   onDocumentationClick: () => void;
   onDashboardClick: () => void;
-  onLogoutClick: () => void;
-
   onFeedbackClick: () => void;
 
   simulatorState: SimulatorState;

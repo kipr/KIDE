@@ -8,17 +8,18 @@ import Tutorials from "./Tutorials";
 const routes: IRoute[] = [
   {
     path: '/',
-    exact: true,
-    component: HomePage,
-    name: 'Home Page',
+    exact: false,
+    component: Root,
+    index: 1,
+    name: 'Blank IDE',
     protected: false
   },
   {
-    path: '/signup',
+    path: '/ide',
     exact: false,
-    component: HomePage,
+    component: Root,
     index: 1,
-    name: 'Home Page',
+    name: 'Blank IDE',
     protected: false
   },
   {
