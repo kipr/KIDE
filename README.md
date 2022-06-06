@@ -39,7 +39,7 @@ sudo apt-get install build-essential
 Clone this repository and its submodules:
 
 ```bash
-git clone --recurse-submodules https://github.com/kipr/Simulator
+git clone --recurse-submodules https://github.com/kipr/KIDE
 ```
 
 Or, if you've already cloned the repository without `--recurse-submodules`, you can initialize the submodules separately:
