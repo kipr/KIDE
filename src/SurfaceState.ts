@@ -12,7 +12,7 @@ export interface SurfaceState{
 
 export namespace SurfaceStatePresets{
   export const jbcA: SurfaceState = {
-    surfaceImage: "static/nightSlime.jpg",
+    surfaceImage: "static/Surface-A.png",
     surfaceWidth: 118,
     surfaceHeight: 59,
     surfaceName: "JBC Mat A"

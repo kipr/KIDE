@@ -775,7 +775,7 @@ export class Space {
     this.mat.position.y = -0.8;
     this.mat.rotate(new Babylon.Vector3(0,1,0),-Math.PI / 2);
     const matMaterial = new Babylon.StandardMaterial("ground", this.scene);
-    matMaterial.ambientTexture = new Babylon.Texture('static/nightSlime.jpg',this.scene);
+    matMaterial.ambientTexture = new Babylon.Texture('static/Surfcace-A.png',this.scene);
     this.mat.material = matMaterial;
     this.mat.physicsImpostor = new Babylon.PhysicsImpostor(this.mat, Babylon.PhysicsImpostor.BoxImpostor,{ mass:0, friction: 1 }, this.scene);
 
