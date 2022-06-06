@@ -19,7 +19,8 @@ Simulates a botball/JBC style demobot with a built in IDE.
 ```bash
 # to get newer versions of Node.js through apt-get, you likely need to add the correct NodeSource repositories
 # for details, see https://github.com/nodesource/distributions
-sudo apt-get install nodejs
+sudo curl https://deb.nodesource.com/setup_18.x | sudo bash
+sudo apt-get install nodejs -y
 sudo apt-get install doxygen
 sudo npm install --global npm
 sudo npm install --global yarn
