@@ -95,13 +95,13 @@ const EditorWidget = styled(Widget, (props: WidgetProps) => {
       ...transparentStyling(props.theme)
     };
     case Size.Type.Miniature: return {
-      gridColumn: 1,
+      gridColumn: '1 / span 2',
       gridRow: 1,
       ...transparentStyling(props.theme)
     };
     default:
     case Size.Type.Partial: return {
-      gridColumn: '1 / span 2',
+      gridColumn: '1 / span 3',
       gridRow: 1,
       ...transparentStyling(props.theme)
     };
@@ -114,10 +114,15 @@ const InfoWidget = styled(Widget, (props: WidgetProps) => {
     case Size.Type.Minimized: return {
       display: 'none'
     };
-    default:
     case Size.Type.Partial: return {
       gridColumn: 3,
-      gridRow: 1,
+      gridRow: '1 / span 2',
+      ...transparentStyling(props.theme)
+    };
+    default:
+    case Size.Type.Miniature: return {
+      gridColumn: 3,
+      gridRow: 2,
       ...transparentStyling(props.theme)
     };
   }
@@ -126,23 +131,17 @@ const InfoWidget = styled(Widget, (props: WidgetProps) => {
 const WorldWidget = styled(Widget, (props: WidgetProps) => {
   const size = props.sizes[props.size];
   switch (size.type) {
-    case Size.Type.Minimized: return {
-      display: 'none'
-    };
     default:
-    case Size.Type.Partial: return {
-      gridColumn: 3,
-      gridRow: 2,
-      ...transparentStyling(props.theme)
-      
-    };
+      case Size.Type.Minimized: return {
+        display: 'none'
+      };
   }
 });
 
 const EDITOR_SIZES: Size[] = [Size.MINIATURE_LEFT, Size.PARTIAL_LEFT, Size.MAXIMIZED, Size.MINIMIZED];
-const INFO_SIZES: Size[] = [Size.PARTIAL_RIGHT, Size.MINIMIZED];
+const INFO_SIZES: Size[] = [Size.MINIATURE_LEFT, Size.PARTIAL_LEFT, Size.MINIMIZED];
 const WORLD_SIZES: Size[] = [Size.PARTIAL_RIGHT, Size.MINIMIZED];
-const CONSOLE_SIZES: Size[] = [Size.MINIATURE_LEFT, Size.PARTIAL_DOWN, Size.MAXIMIZED, Size.MINIMIZED];
+const CONSOLE_SIZES: Size[] = [Size.MINIATURE_LEFT, Size.PARTIAL_LEFT, Size.MAXIMIZED, Size.MINIMIZED];
 
 const sizeDict = (sizes: Size[]) => {
   const forward: { [type: number]: number } = {};
@@ -169,9 +168,9 @@ class OverlayLayout extends React.PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      editorSize: Size.Type.Miniature,
-      infoSize: Size.Type.Partial,
-      consoleSize: Size.Type.Miniature,
+      editorSize: Size.Type.Partial,
+      infoSize: Size.Type.Miniature,
+      consoleSize: Size.Type.Partial,
       worldSize: Size.Type.Partial,
     };
   }
@@ -248,9 +247,9 @@ class OverlayLayout extends React.PureComponent<Props, State> {
 
   public showAll() {
     this.setState({
-      editorSize: Size.Type.Miniature,
+      editorSize: Size.Type.Partial,
       infoSize: Size.Type.Partial,
-      consoleSize: Size.Type.Miniature,
+      consoleSize: Size.Type.Partial,
       worldSize: Size.Type.Partial,
     });
   }

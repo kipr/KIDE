@@ -141,22 +141,6 @@ class Info extends React.PureComponent<Props, State> {
     } = props;
     const { collapsed } = state;
 
-    const locationName = StyledText.compose({
-      items: [
-        StyledText.text({
-          text: 'Start Location',
-        }),
-        StyledText.component({
-          component: ResetIcon,
-          props: {
-            icon: 'sync',
-            onClick: this.onResetLocationClick_,
-            theme
-          }
-        })
-      ]
-    });
-
     const servos = robotState.servoPositions.map((value, i) => (
       <Row key={`servo-pos-${i}`} theme={theme}>
         <SensorWidget value={value} name={`get_servo_position(${i})`} plotTitle='Servo Position Plot' theme={theme} />
@@ -190,18 +174,6 @@ class Info extends React.PureComponent<Props, State> {
     return (
       <ScrollArea theme={theme} style={{ flex: '1 1' }}>
         <Container theme={theme} style={style} className={className}>
-          <StyledSection
-            name={locationName}
-            theme={theme}
-            onCollapsedChange={this.onCollapsedChange_('location')}
-            collapsed={collapsed['location']}
-          >
-            <Location
-              robotStartPosition={robotStartPosition}
-              onSetRobotStartPosition={this.props.onSetRobotStartPosition}
-              theme={theme}
-            />
-          </StyledSection>
           <StyledSection
             name={SERVOS_NAME}
             theme={theme}
