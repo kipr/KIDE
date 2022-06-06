@@ -1,6 +1,8 @@
 # JS
 node_modules
-yarn-error.log
+*.log
+*.lock
+emsdk
 dist
 
 # Prerequisites
