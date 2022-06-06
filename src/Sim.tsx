@@ -145,7 +145,7 @@ export class Space {
       if (this.lastState_ && id in lastItems && !deepNeq(lastItems[id], item)) continue;
 
       if (meshName === undefined) {
-        this.itemMap_.set(id, this.createItem(item));
+        //Removed for IDE
       } else {
         const mesh = this.scene.getMeshByID(meshName);
         const { position, orientation } = item.origin ?? {};
@@ -362,8 +362,6 @@ export class Space {
     this.ammo_ = new Babylon.AmmoJSPlugin(true, Ammo);
     this.scene.enablePhysics(gravityVector, this.ammo_);
     this.scene.getPhysicsEngine().setSubTimeStep(5);
-
-    this.buildFloor();
 
     // (x, z) coordinates of cans around the board
     this.canCoordinates = [[-22, -14.3], [0, -20.6], [15.5, -23.7], [0, -6.9], [-13.7, 6.8], [0, 6.8], [13.5, 6.8], [25.1, 14.8], [0, 34], [-18.8, 45.4], [0, 54.9], [18.7, 45.4]];
@@ -741,61 +739,12 @@ export class Space {
     resetTransformNode.dispose();
   }
 
-  public handleResize(): void {
-    this.engine.resize();
-  }
-
-  public createItem(item: Item): string {
-    switch (item.type) {
-      case Item.Type.Can: {
-        const can = new Can(this.scene, { item });
-        can.place();
-        return can.id;
-      }
-      case Item.Type.PaperReam: {
-        const ream = new PaperReam(this.scene, { item });
-        ream.place();
-        return ream.id;
-      }
-      default: {
-        throw new Error('Type not supported or undefined');
-      }
-    }
-  }
   
   public updateSensorOptions(isNoiseEnabled: boolean, isRealisticEnabled: boolean): void {
     for (const sensorObject of this.sensorObjects_) {
       sensorObject.isNoiseEnabled = isNoiseEnabled;
       sensorObject.isRealisticEnabled = isRealisticEnabled;
     }
-  }
-
-  private buildFloor() {
-    this.mat = Babylon.MeshBuilder.CreateGround("mat", { width:118, height:59, subdivisions:2 }, this.scene);
-    this.mat.position.y = -0.8;
-    this.mat.rotate(new Babylon.Vector3(0,1,0),-Math.PI / 2);
-    const matMaterial = new Babylon.StandardMaterial("ground", this.scene);
-    matMaterial.ambientTexture = new Babylon.Texture('static/Surfcace-A.png',this.scene);
-    this.mat.material = matMaterial;
-    this.mat.physicsImpostor = new Babylon.PhysicsImpostor(this.mat, Babylon.PhysicsImpostor.BoxImpostor,{ mass:0, friction: 1 }, this.scene);
-
-    this.ground = Babylon.MeshBuilder.CreateGround("ground", { width:354, height:354, subdivisions:2 }, this.scene);
-    this.ground.position.y = -0.83;
-    const groundMaterial = new Babylon.StandardMaterial("ground", this.scene);
-    groundMaterial.emissiveColor = new Babylon.Color3(0.1,0.1,0.1);
-    this.ground.material = groundMaterial;
-    this.ground.physicsImpostor = new Babylon.PhysicsImpostor(this.ground, Babylon.PhysicsImpostor.BoxImpostor,{ mass:0, friction: 1 }, this.scene);
-  }
-
-  public rebuildFloor(surfaceState: SurfaceState): void { 
-    this.mat.dispose();
-    this.mat = Babylon.MeshBuilder.CreateGround("mat", { width: surfaceState.surfaceWidth, height: surfaceState.surfaceHeight, subdivisions:2 }, this.scene);
-    this.mat.position.y = -0.8;
-    this.mat.rotate(new Babylon.Vector3(0,1,0),-Math.PI / 2);
-    const matMaterial = new Babylon.StandardMaterial("ground", this.scene);
-    matMaterial.ambientTexture = new Babylon.Texture(surfaceState.surfaceImage,this.scene);
-    this.mat.material = matMaterial;
-    this.mat.physicsImpostor = new Babylon.PhysicsImpostor(this.mat, Babylon.PhysicsImpostor.BoxImpostor,{ mass:0, friction: 1 }, this.scene);
   }
 
   private setDriveMotors(leftSpeed: number, rightSpeed: number) {
