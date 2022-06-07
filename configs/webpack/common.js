@@ -6,6 +6,11 @@ const { DefinePlugin } = require('webpack');
 const commitHash = require('child_process').execSync('git rev-parse --short=8 HEAD').toString().trim();
 
 module.exports = {
+
+  externals: [
+    'child_process'
+  ], 
+
   entry: {
     app: './index.tsx',
   },

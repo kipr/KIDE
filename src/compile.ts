@@ -7,10 +7,9 @@ export default (code: string): Promise<CompileResult> => {
     var exec = require('child_process').exec;
 
     //Execute shell
-    exec('echo test',
-    function (err, stdout, stderr) {
-        resolve(JSON.parse('stdout: ' + stdout + '\n stderr: ' + stderr) as CompileResult);
-        //console.log('stderr: ' + stderr);
+    exec('echo test', (err, stdout, stderr) => {
+        resolve(JSON.parse('{"stdout":"' + stdout + '", "stderr":"' + stderr + '"}') as CompileResult);
+        console.log('stderr: ' + stderr);
         if (err !== null) {
              reject(err);
         }
