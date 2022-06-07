@@ -7,7 +7,7 @@ import { Fa } from './Fa';
 import { Layout } from './Layout';
 import LayoutPicker from './LayoutPicker';
 import { SimulatorState } from './SimulatorState';
-import { GREEN, RED, ThemeProps } from './theme';
+import { GREEN, RED, YELLOW, ThemeProps } from './theme';
 
 export interface MenuProps extends StyleProps, ThemeProps {
   layout: Layout;
@@ -17,6 +17,7 @@ export interface MenuProps extends StyleProps, ThemeProps {
   onHideAll: () => void;
 
   onRunClick: () => void;
+  onCompileClick: () => void;
   onStopClick: () => void;
   onDownloadClick: () => void;
 
@@ -111,6 +112,13 @@ const StopItem = withStyleDeep(Item, (props: ClickProps & { $running: boolean })
   } : {},
 }));
 
+const CompileItem = withStyleDeep(Item, (props: ClickProps & { $running: boolean }) => ({
+  backgroundColor: props.disabled ? YELLOW.disabled : YELLOW.standard,
+  ':hover': props.onClick && !props.disabled ? {
+    backgroundColor: YELLOW.hover
+  } : {},
+}));
+
 
 const ItemIcon = styled(Fa, {
   paddingRight: '10px'
@@ -169,6 +177,17 @@ class SimMenu extends React.PureComponent<Props, State> {
           >
             <ItemIcon icon='play' /> Run
           </RunItem>
+
+          <CompileItem
+            theme={theme}
+            onClick={SimulatorState.isStopped(simulatorState) ? onRunClick : undefined}
+            $running={running}
+            disabled={!SimulatorState.isStopped(simulatorState)}
+            style={{ borderLeft: `1px solid ${theme.borderColor}` }}
+          >
+            <ItemIcon icon='cogs' /> Compile
+          </CompileItem>
+
           <StopItem
             theme={theme}
             onClick={running ? onStopClick : undefined}
@@ -177,6 +196,7 @@ class SimMenu extends React.PureComponent<Props, State> {
           >
             <ItemIcon icon='stop' /> Stop
           </StopItem>
+
           <Item theme={theme} onClick={onDownloadClick}><ItemIcon icon='file-download' /> Download</Item>
 
           <Spacer style={{ borderRight: `1px solid ${theme.borderColor}` }} />

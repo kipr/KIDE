@@ -329,6 +329,13 @@ export class Root extends React.Component<Props, State> {
     });
   };
 
+  private onCompileClick_ = () => {
+    WorkerInstance.stop();
+    this.setState({
+      simulatorState: SimulatorState.STOPPED
+    });
+  };
+
   private onStopClick_ = () => {
     WorkerInstance.stop();
     this.setState({
@@ -475,6 +482,7 @@ export class Root extends React.Component<Props, State> {
             onAboutClick={this.onModalClick_(Modal.ABOUT)}
             onDownloadClick={this.onDownloadClick_}
             onRunClick={this.onRunClick_}
+            onCompileClick={this.onCompileClick_}
             onStopClick={this.onStopClick_}
             onDocumentationClick={this.onDocumentationClick}
             onDashboardClick={this.onDashboardClick}

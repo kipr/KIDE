@@ -1,6 +1,23 @@
+import { exec } from "child_process";
+
 export default (code: string): Promise<CompileResult> => {
 
   return new Promise<CompileResult>((resolve, reject) => {
+    //Get a child process to execute shell commands on
+    var exec = require('child_process').exec;
+
+    //Execute shell
+    exec('echo test',
+    function (err, stdout, stderr) {
+        resolve(JSON.parse('stdout: ' + stdout + '\n stderr: ' + stderr) as CompileResult);
+        //console.log('stderr: ' + stderr);
+        if (err !== null) {
+             reject(err);
+        }
+    });
+    
+
+    /*
     const req = new XMLHttpRequest();
     req.onload = () => {
       if (req.status !== 200) {
@@ -21,6 +38,7 @@ export default (code: string): Promise<CompileResult> => {
     req.send(JSON.stringify({
       code
     }));
+    */
   });
   
 };
