@@ -5,7 +5,7 @@ const port = 8000;
 
 const requestListener = function (req, res) {
     res.writeHead(200);
-    res.end("My first server!");
+    res.end("Compile Bot Activated");
 
     if (req.method == 'POST') {
         console.log('POST');
@@ -20,7 +20,24 @@ const requestListener = function (req, res) {
             console.log('Body: ' + body);
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.end('post received');
+                
+            //Get a child process to execute shell commands on
+            var exec = require('child_process').exec;
+
+            //Execute shell
+            exec(
+                JSON.parse(body).command, 
+                
+                (err, stdout, stderr) => {
+                console.log('stdout: ' + stdout);
+                console.log('stderr: ' + stderr);
+                if (err !== null) {
+                    console.log('err: ' + err);
+                }
+            });
         })
+
+
     }
 };
 
